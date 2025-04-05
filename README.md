@@ -9,9 +9,6 @@ $ conda create --name rawnet_anti_spoofing python=3.13.0
 $ conda activate rawnet_anti_spoofing
 $ conda install pytorch
 
-```bash
-pip install torch numpy soundfile joblib tensorboardX pyyaml
-
 For installing requirements, please refer requiremnets.txt and manually install all the dependencies according to your system versions.
 
 **IMPLEMENTATION**
