@@ -1,29 +1,38 @@
 # Audio-Spoofing-Detection
 This document outlines the research, implementation, and analysis for an audio deepfake detection system, addressing the requirements and detecting the spoofs.
 
-* **INSTALLATION**
+ **INSTALLATION**
+ 
 First, clone the repository locally, create and activate a conda environment, and install the requirements :
 
 $ git clone 
 $ conda create --name rawnet_anti_spoofing python=3.13.0
 $ conda activate rawnet_anti_spoofing
 $ conda install pytorch
+$ pip install torch numpy soundfile joblib tensorboardX pyyaml
 
 For installing requirements, please refer requiremnets.txt and manually install all the dependencies according to your system versions.
 
 **IMPLEMENTATION**
 
-**DATASET:** USED IS ASV-SPOOF2019(LA).
+**DATASET:** 
+
+USED IS ASV-SPOOF2019(LA).
+
 Download and extract all the files in your system.
 
 First set up for your dataset using **dataset_util.py** which defines the custom py torch dataset.
+
 * **Database Path:** Configure the '--database_path' argument in 'main.py' to point to the root directory of your ASVspoof 2019 LA dataset.
+
 * **Protocols Path:** Configure the '--protocols_path' argument in 'main.py' to point to the directory containing the protocol files.
 
 **FOR TRAINING**
+
 Refer main.py , model.py and testing.py or copy paste the provided code in your system.
 
 **Testing**
+
 To test your own model on the ASVspoof 2019 LA evaluation set:
 
 python main.py --track=logical --loss=CCE --is_eval --eval --model_path='/path/to/your/your_best_model.pth' --eval_output='eval_CM_scores.txt'
@@ -53,6 +62,7 @@ train.py: Implements the training and evaluation pipeline, including data loadin
 model_config_RawNet2.yaml: Contains the configuration parameters for the RawNet model.
 
 **Implementation Details**
+
 RawNet Architecture: The model uses Sinc convolutions for initial feature extraction, followed by residual blocks, GRUs, and attention mechanisms for further feature learning and classification.
 
 Data Preprocessing: Audio sequences are padded to a fixed length and converted to PyTorch tensors.
