@@ -1,61 +1,150 @@
 # Audio-Spoofing-Detection
-This document outlines the research, implementation, and analysis for an audio deepfake detection system, addressing the requirements and detecting the spoofs.
 
- **INSTALLATION**
- 
-First, clone the repository locally, create and activate a conda environment, and install the requirements :
+This project implements an audio deepfake detection system, addressing the requirements and detecting audio spoofs.
 
-$ git clone https://github.com/tarun02-git/Audio-Spoofing-Detection.git
+## Installation
 
-$ conda create --name rawnet_anti_spoofing python=3.13.0
+To set up the project:
 
-$ conda activate rawnet_anti_spoofing
+1.  **Clone the repository:**
 
-$ conda install pytorch
+    ```bash
+    git clone [https://github.com/tarun02-git/Audio-Spoofing-Detection.git](https://github.com/tarun02-git/Audio-Spoofing-Detection.git)
+    ```
 
-$ pip install torch numpy soundfile joblib tensorboardX pyyaml
+2.  **Create and activate a conda environment (Recommended):**
 
-For installing requirements, please refer requiremnets.txt and manually install all the dependencies according to your system versions.
+    ```bash
+    conda create --name rawnet_anti_spoofing python=3.13.0
+    conda activate rawnet_anti_spoofing
+    ```
 
-**IMPLEMENTATION**
+3.  **Install PyTorch:**
 
-**DATASET:** 
+    ```bash
+    conda install pytorch
+    ```
 
-USED IS ASV-SPOOF2019(LA).
+4.  **Install other dependencies:**
 
-Download and extract all the files in your system.
+    ```bash
+    pip install torch numpy soundfile joblib tensorboardX pyyaml
+    ```
 
-First set up for your dataset using **dataset_util.py** which defines the custom py torch dataset.
+    * Alternatively, please refer to `requirements.txt` and manually install all dependencies according to your system versions.
 
-* **Database Path:** Configure the '--database_path' argument in 'main.py' to point to the root directory of your ASVspoof 2019 LA dataset.
+## Implementation
 
-* **Protocols Path:** Configure the '--protocols_path' argument in 'main.py' to point to the directory containing the protocol files.
+### Dataset
 
-**FOR TRAINING**
+* **Used Dataset:** ASVspoof 2019 (LA)
 
-Refer main.py , model.py and testing.py or copy paste the provided code in your system.
+* Download and extract all the files in your system.
 
-# Testing
+* **Dataset Setup:**
 
-To test your own model on the ASVspoof 2019 LA evaluation set:
+    * Set up your dataset using `dataset_util.py`, which defines the custom PyTorch dataset.
 
+    * **Database Path:** Configure the `--database_path` argument in `main.py` to point to the root directory of your ASVspoof 2019 LA dataset.
+
+    * **Protocols Path:** Configure the `--protocols_path` argument in `main.py` to point to the directory containing the protocol files.
+
+### Training
+
+* Refer to `main.py`, `model.py`, and `testing.py` for the training implementation. You can either use these files directly or copy and paste the provided code into your system.
+
+## Testing
+
+To test your model on the ASVspoof 2019 LA evaluation set:
+
+```bash
 python main.py --track=logical --loss=CCE --is_eval --eval --model_path='/path/to/your/your_best_model.pth' --eval_output='eval_CM_scores.txt'
 
-If you would like to compute scores on the development set of ASVspoof 2019 simply run:
+Markdown
+
+# Audio-Spoofing-Detection
+
+This project implements an audio deepfake detection system, addressing the requirements and detecting audio spoofs.
+
+## Installation
+
+To set up the project:
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone [https://github.com/tarun02-git/Audio-Spoofing-Detection.git](https://github.com/tarun02-git/Audio-Spoofing-Detection.git)
+    ```
+
+2.  **Create and activate a conda environment (Recommended):**
+
+    ```bash
+    conda create --name rawnet_anti_spoofing python=3.13.0
+    conda activate rawnet_anti_spoofing
+    ```
+
+3.  **Install PyTorch:**
+
+    ```bash
+    conda install pytorch
+    ```
+
+4.  **Install other dependencies:**
+
+    ```bash
+    pip install torch numpy soundfile joblib tensorboardX pyyaml
+    ```
+
+    * Alternatively, please refer to `requirements.txt` and manually install all dependencies according to your system versions.
+
+## Implementation
+
+### Dataset
+
+* **Used Dataset:** ASVspoof 2019 (LA)
+
+* Download and extract all the files in your system.
+
+* **Dataset Setup:**
+
+    * Set up your dataset using `dataset_util.py`, which defines the custom PyTorch dataset.
+
+    * **Database Path:** Configure the `--database_path` argument in `main.py` to point to the root directory of your ASVspoof 2019 LA dataset.
+
+    * **Protocols Path:** Configure the `--protocols_path` argument in `main.py` to point to the directory containing the protocol files.
+
+### Training
+
+* Refer to `main.py`, `model.py`, and `testing.py` for the training implementation. You can either use these files directly or copy and paste the provided code into your system.
+
+## Testing
+
+To test your model on the ASVspoof 2019 LA evaluation set:
+
+```bash
+python main.py --track=logical --loss=CCE --is_eval --eval --model_path='/path/to/your/your_best_model.pth' --eval_output='eval_CM_scores.txt'
+To compute scores on the development set of ASVspoof 2019:
+
+Bash
 
 python main.py --track=logical --loss=CCE --eval --model_path='/path/to/your/best_model.pth' --eval_output='dev_CM_scores.txt'
 
-**Arguments:**
+
+## Arguments
 
 --eval: Enables evaluation mode.
+
 --model_path: Path to the model checkpoint.
+
 --eval_output: Path to save the evaluation results.
 
-**Model Configuration**
+## Model Configuration
+
 
 The model architecture is configured in the model_config_RawNet2.yaml file. You can modify the parameters in this file to experiment with different model configurations.
 
-**Code Description**
+## Code Description
+
 
 dataset_util.py: Defines a custom PyTorch Dataset class (ASVDataset) for loading and processing the ASVspoof 2019 LA dataset.
 
@@ -65,23 +154,32 @@ train.py: Implements the training and evaluation pipeline, including data loadin
 
 model_config_RawNet2.yaml: Contains the configuration parameters for the RawNet model.
 
-**Implementation Details**
+Implementation Details
 
-RawNet Architecture: The model uses Sinc convolutions for initial feature extraction, followed by residual blocks, GRUs, and attention mechanisms for further feature learning and classification.
+**RawNet Architecture:**
 
-Data Preprocessing: Audio sequences are padded to a fixed length and converted to PyTorch tensors.
+ The model uses Sinc convolutions for initial feature extraction, followed by residual blocks, GRUs, and attention mechanisms for further feature learning and classification.
 
-Training: The model is trained using the Adam optimizer and cross-entropy loss with class weights to handle class imbalance (Rawnet).
+**Data Preprocessing:**
 
-Evaluation: The evaluation script generates an evaluation file in the format expected by the ASVspoof evaluation scripts.
+ Audio sequences are padded to a fixed length and converted to PyTorch tensors.
 
-**Results**
+**Training:**
+
+ The model is trained using the Adam optimizer and cross-entropy loss with class weights to handle class imbalance (RawNet).
+
+**Evaluation:**
+
+ The evaluation script generates an evaluation file in the format expected by the ASVspoof evaluation scripts.
+
+## Results
 
 The training and evaluation results are logged using TensorBoardX and saved to the specified output files.
 
-**Contact**
+## Contact
 
 For any query regarding this repository, please contact:
-Tarun Agarwal.
-Tarun112agarwal@gmail.com
 
+Tarun Agarwal
+
+Tarun112agarwal@gmail.com
