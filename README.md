@@ -59,76 +59,7 @@ To test your model on the ASVspoof 2019 LA evaluation set:
 
 ```bash
 python main.py --track=logical --loss=CCE --is_eval --eval --model_path='/path/to/your/your_best_model.pth' --eval_output='eval_CM_scores.txt'
-
-Markdown
-
-# Audio-Spoofing-Detection
-
-This project implements an audio deepfake detection system, addressing the requirements and detecting audio spoofs.
-
-## Installation
-
-To set up the project:
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone [https://github.com/tarun02-git/Audio-Spoofing-Detection.git](https://github.com/tarun02-git/Audio-Spoofing-Detection.git)
-    ```
-
-2.  **Create and activate a conda environment (Recommended):**
-
-    ```bash
-    conda create --name rawnet_anti_spoofing python=3.13.0
-    conda activate rawnet_anti_spoofing
-    ```
-
-3.  **Install PyTorch:**
-
-    ```bash
-    conda install pytorch
-    ```
-
-4.  **Install other dependencies:**
-
-    ```bash
-    pip install torch numpy soundfile joblib tensorboardX pyyaml
-    ```
-
-    * Alternatively, please refer to `requirements.txt` and manually install all dependencies according to your system versions.
-
-## Implementation
-
-### Dataset
-
-* **Used Dataset:** ASVspoof 2019 (LA)
-
-* Download and extract all the files in your system.
-
-* **Dataset Setup:**
-
-    * Set up your dataset using `dataset_util.py`, which defines the custom PyTorch dataset.
-
-    * **Database Path:** Configure the `--database_path` argument in `main.py` to point to the root directory of your ASVspoof 2019 LA dataset.
-
-    * **Protocols Path:** Configure the `--protocols_path` argument in `main.py` to point to the directory containing the protocol files.
-
-### Training
-
-* Refer to `main.py`, `model.py`, and `testing.py` for the training implementation. You can either use these files directly or copy and paste the provided code into your system.
-
-## Testing
-
-To test your model on the ASVspoof 2019 LA evaluation set:
-
-```bash
-python main.py --track=logical --loss=CCE --is_eval --eval --model_path='/path/to/your/your_best_model.pth' --eval_output='eval_CM_scores.txt'
-To compute scores on the development set of ASVspoof 2019:
-
-Bash
-
-python main.py --track=logical --loss=CCE --eval --model_path='/path/to/your/best_model.pth' --eval_output='dev_CM_scores.txt'
-
+```
 
 ## Arguments
 
