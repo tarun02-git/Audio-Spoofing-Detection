@@ -1,7 +1,7 @@
 # Audio-Spoofing-Detection
 This document outlines the research, implementation, and analysis for an audio deepfake detection system, addressing the requirements and detecting the spoofs.
 
-**INSTALLATION**
+* **INSTALLATION**
 First, clone the repository locally, create and activate a conda environment, and install the requirements :
 
 $ git clone 
