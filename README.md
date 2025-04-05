@@ -5,10 +5,14 @@ This document outlines the research, implementation, and analysis for an audio d
  
 First, clone the repository locally, create and activate a conda environment, and install the requirements :
 
-$ git clone 
+$ git clone https://github.com/tarun02-git/Audio-Spoofing-Detection.git
+
 $ conda create --name rawnet_anti_spoofing python=3.13.0
+
 $ conda activate rawnet_anti_spoofing
+
 $ conda install pytorch
+
 $ pip install torch numpy soundfile joblib tensorboardX pyyaml
 
 For installing requirements, please refer requiremnets.txt and manually install all the dependencies according to your system versions.
