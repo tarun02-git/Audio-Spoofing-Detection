@@ -1,0 +1,9 @@
+Download Nvidia CUDA
+Import numba
+Import numpy
+Import SoundFile
+Import librosa
+Import pyyaml
+Import tensorboardX
+Import matplotlib
+Setup your environment according to your accessiblity.
